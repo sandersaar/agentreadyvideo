@@ -1,14 +1,12 @@
 # Which license applies
 
-This repo uses three licenses. Each file falls under exactly one.
+This repo uses three licensing terms. Each file falls under exactly one.
 
-| What | License | File |
+| What | Terms | File |
 |---|---|---|
-| Specification text: everything in `spec/` | Community Specification License 1.0 | [LICENSE-SPEC.md](LICENSE-SPEC.md) |
+| Specification text: everything in `spec/` | Contributed to the W3C Agent-Ready Video Community Group under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/process/cla/) at launch. Until launch, contributions are accepted under the same CLA terms. | [LICENSE-SPEC.md](LICENSE-SPEC.md) |
 | JSON Schemas in `schemas/`, examples in `examples/`, scripts in `scripts/`, CI config and `package.json` | Apache-2.0 | [LICENSE](LICENSE) |
-| Other documentation: `README.md`, `conformance/`, `GOVERNANCE.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, issue templates | CC-BY-4.0 | [LICENSE-DOCS.md](LICENSE-DOCS.md) |
-
-If the Community Specification License and another license conflict for spec text, the Community Specification License applies.
+| Other documentation: `README.md`, `conformance/`, `charter/`, `GOVERNANCE.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, issue templates | CC-BY-4.0 | [LICENSE-DOCS.md](LICENSE-DOCS.md) |
 
 The license files themselves keep their own terms.
 

@@ -8,7 +8,7 @@ ARV is **Draft 1.0, proposed**. It stays "proposed" until at least one outside i
 
 ARV is maintained by **AgentCDN** with open contributions. The maintainer reviews proposals, merges changes, publishes the schemas at `https://agentreadyvideo.org/schema/`, and keeps this repo and the website in step.
 
-The maintainer does not own the format. The spec text is under the Community Specification License 1.0 and may be forked under that license.
+The maintainer does not own the format. At the launch of the W3C Community Group, AgentCDN contributes the spec text to the group under the W3C Community Contributor License Agreement (CLA). See [LICENSE-SPEC.md](LICENSE-SPEC.md).
 
 ## When a feature becomes required
 
@@ -16,7 +16,16 @@ A feature becomes **required** only after two independent implementations pass t
 
 ## W3C Community Group
 
-A W3C Community Group for Agent-Ready Video is **proposed** and not yet formed. When it forms, anyone with a free W3C account can join. Community Group reports are not W3C Recommendations. If the group forms, the maintainer will propose moving spec development there.
+A W3C Community Group for Agent-Ready Video is **proposed** and under W3C staff review. It is not formed yet. When it forms, anyone with a free W3C account can join.
+
+At launch:
+
+- AgentCDN contributes the current draft to the group under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/process/cla/).
+- The group governs the evolution of the specification and publishes it as a Community Group Report. Community Group Reports are not W3C Recommendations.
+- AgentCDN remains one implementer and the initial editor, with no special rights over the text.
+- Schemas, examples, the validator and code stay Apache-2.0. Docs stay CC-BY-4.0.
+
+Until launch, contributions to the spec text are accepted under the same CLA terms. A draft charter for the group is in [charter/DRAFT-charter.md](charter/DRAFT-charter.md). It is not adopted. The group adopts a charter after launch.
 
 ## How to propose a change
 

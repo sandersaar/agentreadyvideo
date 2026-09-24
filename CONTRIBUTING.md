@@ -28,7 +28,7 @@ Thanks for helping. ARV gets better when publishers, platforms, player makers an
 
 By contributing you agree that:
 
-- Contributions to the spec text are made under the [Community Specification License 1.0](LICENSE-SPEC.md), including its patent terms.
+- Contributions to the spec text are made under the terms of the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/process/cla/), including its patent commitments. AgentCDN contributes the spec text to the W3C Agent-Ready Video Community Group under the W3C CLA at launch. After launch, contribute through the group. See [LICENSE-SPEC.md](LICENSE-SPEC.md).
 - Contributions to schemas, scripts and other code are made under [Apache-2.0](LICENSE).
 - Contributions to other documentation are made under [CC-BY-4.0](LICENSE-DOCS.md).
 

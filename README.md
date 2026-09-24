@@ -23,6 +23,7 @@ Three conformance levels: **L1** crawl-readable, **L2** agent-callable, **L3** r
 | [`examples/1.0/`](examples/1.0/) | Example objects. CI validates every one against its schema |
 | [`conformance/`](conformance/README.md) | The 18 checks and three levels as a checklist |
 | [`GOVERNANCE.md`](GOVERNANCE.md) | Who maintains ARV and how changes are made |
+| [`charter/DRAFT-charter.md`](charter/DRAFT-charter.md) | Draft charter for the W3C Community Group (not yet adopted) |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to propose a change |
 | [`CHANGELOG.md`](CHANGELOG.md) | What changed and when |
 
@@ -58,6 +59,6 @@ Open an issue with the **Proposal** template for a change to the spec or schemas
 
 ## License
 
-Spec text: Community Specification License 1.0. Schemas and code: Apache-2.0. Other docs: CC-BY-4.0. See [`LICENSES.md`](LICENSES.md).
+Spec text: contributed to the W3C Agent-Ready Video Community Group under the [W3C CLA](https://www.w3.org/community/about/process/cla/) at launch. Until launch, spec text contributions are accepted under the same CLA terms. Schemas and code: Apache-2.0. Other docs: CC-BY-4.0. See [`LICENSES.md`](LICENSES.md).
 
 ARV is maintained by AgentCDN.

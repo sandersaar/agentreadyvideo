@@ -8,6 +8,7 @@ All notable changes to the ARV specification, schemas and examples.
 
 ## 2026-09-24
 
+- W3C Community Group proposal under staff review; AgentCDN will contribute the draft under the W3C CLA at launch; draft charter added.
 - First origin live: AgentCDN serves an ARV 1.0 manifest at https://agentcdn.com/.well-known/arv, an ARV catalog, RSL 1.0 license terms, the Content-Usage header, range-addressed moment ids and an MCP origin profile (server agentcdn-arv). Self-declared, not yet validated; the validator is not released.
 - Added optional `entitlement` and `payment` objects to RightsSummary and PlaybackDescriptor, optional `payment_ref` and `entitlement_ref` to UsageReceipt, and optional `entitlement_url` and `payment_terms_url` to Manifest. Defined in 1.0, optional to implement. An L3 origin that sets `required: true` returns 402 or 403 with the challenge URL.
 - Added the example `rights-summary-account-link.json` for a restricted moment that needs account linking.
