@@ -35,6 +35,8 @@ npm test
 
 ## Links
 
+The site at agentreadyvideo.org renders this repo at the commit pinned in its standard.lock.json.
+
 - Website: <https://agentreadyvideo.org>
 - Specification: <https://agentreadyvideo.org/spec>
 - FAQ: <https://agentreadyvideo.org/faq>
