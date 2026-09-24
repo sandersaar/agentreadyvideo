@@ -1,0 +1,18 @@
+{
+  "name": "agentreadyvideo",
+  "version": "1.0.0-draft",
+  "private": true,
+  "description": "Agent-Ready Video (ARV): the standard, schemas, examples and conformance. Draft 1.0, proposed.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node scripts/check-words.mjs && node scripts/validate-examples.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

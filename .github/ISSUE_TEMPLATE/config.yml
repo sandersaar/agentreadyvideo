@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Specification
+    url: https://agentreadyvideo.org/spec
+    about: Read the current draft before you open an issue.
+  - name: FAQ
+    url: https://agentreadyvideo.org/faq
+    about: Common questions with short answers.

@@ -1,0 +1,68 @@
+{
+  "arv": "1.0",
+  "origin": "https://example.com",
+  "publisher": {
+    "name": "Example Garage"
+  },
+  "assets": [
+    {
+      "arv": "1.0",
+      "id": "vid_8f2c",
+      "title": "Tuning a carburettor",
+      "duration_ms": 1284000,
+      "language": "en",
+      "content_hash": "sha256:9b1e...",
+      "creator": {
+        "id": "cr_12",
+        "name": "Example Garage",
+        "url": "https://example.com"
+      },
+      "page_url": "https://example.com/videos/carb",
+      "c2pa": {
+        "credentials_url": "https://example.com/c2pa/vid_8f2c"
+      },
+      "extensions": {
+        "com.mux": {
+          "playback_id": "abc"
+        }
+      }
+    }
+  ],
+  "moments": [
+    {
+      "arv": "1.0",
+      "id": "mom_rg2e4kdenkmkzilboihacumshn",
+      "moment_uri": "arv:vid_8f2c#t=12400,31000",
+      "moment_url": "https://example.com/videos/carb#t=12.4,31",
+      "asset_id": "vid_8f2c",
+      "start_ms": 12400,
+      "end_ms": 31000,
+      "snap": "sentence",
+      "title": "Setting the idle mixture screw",
+      "evidence": [
+        {
+          "type": "transcript",
+          "start_ms": 12900,
+          "end_ms": 18200,
+          "text": "Turn the mixture screw a quarter turn out",
+          "confidence": 0.93
+        },
+        {
+          "type": "shot_caption",
+          "start_ms": 14000,
+          "end_ms": 22000,
+          "text": "Close-up of a screwdriver on the idle screw",
+          "confidence": 0.81
+        }
+      ],
+      "evidence_grade": "C",
+      "confidence": {
+        "score": 0.84,
+        "band": "high"
+      },
+      "aliases": [
+        "amt_2b7c..."
+      ]
+    }
+  ]
+}

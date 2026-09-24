@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/usage-receipt.schema.json",
+  "title": "ARV UsageReceipt",
+  "description": "A signed record that a moment was used. References a resolvable moment.",
+  "type": "object",
+  "required": [
+    "arv",
+    "receipt_id",
+    "moment_uri",
+    "moment_id",
+    "action",
+    "served_to",
+    "policy_version",
+    "served_at",
+    "jws"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "receipt_id": {
+      "type": "string"
+    },
+    "moment_uri": {
+      "type": "string",
+      "pattern": "^arv:[^#\\s]+#t=\\d+,\\d+$",
+      "description": "arv:{asset_id}#t={start_ms},{end_ms}. The canonical snapped range is the moment's identity."
+    },
+    "moment_id": {
+      "type": "string",
+      "pattern": "^mom_[a-z2-7]{26}$",
+      "description": "\"mom_\" + first 26 characters of lowercase base32 (RFC 4648, no padding) of SHA-256 over \"{origin}|{asset_id}|{start_ms}|{end_ms}\". Recomputable by anyone."
+    },
+    "action": {
+      "type": "string"
+    },
+    "served_to": {
+      "type": "object",
+      "required": [
+        "agent"
+      ],
+      "properties": {
+        "agent": {
+          "type": "string"
+        },
+        "surface": {
+          "type": "string"
+        }
+      }
+    },
+    "policy_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "served_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "citation": {
+      "type": "string"
+    },
+    "jws": {
+      "type": "string",
+      "description": "Compact JWS over the receipt, verifiable with the origin's jwks_url."
+    },
+    "payment_ref": {
+      "type": "string",
+      "description": "Reference to the payment that paid for this use. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it."
+    },
+    "entitlement_ref": {
+      "type": "string",
+      "description": "Reference to the entitlement that unlocked this use. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it."
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/manifest.schema.json",
+  "title": "ARV Manifest",
+  "description": "The origin manifest at /.well-known/arv. Names the conformance level, license, keys, tool profiles and catalogs.",
+  "type": "object",
+  "required": [
+    "arv",
+    "conformance_level",
+    "publisher",
+    "catalogs"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "conformance_level": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    "publisher": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        }
+      }
+    },
+    "license_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "jwks_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "catalogs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "tool_profiles": {
+      "type": "object",
+      "properties": {
+        "mcp_origin": {
+          "type": "object",
+          "required": [
+            "url",
+            "version"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "webmcp_page": {
+          "type": "object",
+          "required": [
+            "adapter",
+            "version"
+          ],
+          "properties": {
+            "adapter": {
+              "type": "string",
+              "format": "uri"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "nlweb": {
+          "type": "object",
+          "required": [
+            "ask"
+          ],
+          "properties": {
+            "ask": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "a2a": {
+          "type": "object",
+          "required": [
+            "card"
+          ],
+          "properties": {
+            "card": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "validator_report": {
+      "type": "string",
+      "format": "uri"
+    },
+    "schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "entitlement_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "description": "Where users link accounts or manage entitlements for this origin. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it."
+    },
+    "payment_terms_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "description": "The origin's payment terms. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it."
+    }
+  },
+  "additionalProperties": true
+}

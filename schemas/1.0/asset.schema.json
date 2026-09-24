@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/asset.schema.json",
+  "title": "ARV Asset",
+  "description": "A video asset. id MUST be unique within the publishing origin. Vendor data MUST live under extensions with a reverse-domain key.",
+  "type": "object",
+  "required": [
+    "arv",
+    "id",
+    "duration_ms"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "language": {
+      "type": "string"
+    },
+    "content_hash": {
+      "type": "string"
+    },
+    "creator": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "page_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "c2pa": {
+      "type": "object",
+      "properties": {
+        "credentials_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Vendor data keyed by reverse domain, for example \"com.mux\".",
+      "propertyNames": {
+        "pattern": "^[a-z0-9-]+(\\.[a-z0-9-]+)+$"
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}

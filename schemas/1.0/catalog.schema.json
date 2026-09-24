@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/catalog.schema.json",
+  "title": "ARV Catalog",
+  "description": "The catalog document (arv.json) an origin publishes: its assets and moments.",
+  "type": "object",
+  "required": [
+    "arv",
+    "origin",
+    "assets",
+    "moments"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "origin": {
+      "type": "string",
+      "format": "uri",
+      "description": "The publishing origin used in every moment id preimage."
+    },
+    "publisher": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "asset.schema.json"
+      }
+    },
+    "moments": {
+      "type": "array",
+      "items": {
+        "$ref": "moment.schema.json"
+      }
+    }
+  },
+  "additionalProperties": true
+}

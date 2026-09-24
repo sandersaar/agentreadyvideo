@@ -1,0 +1,22 @@
+{
+  "arv": "1.0",
+  "id": "vid_8f2c",
+  "title": "Tuning a carburettor",
+  "duration_ms": 1284000,
+  "language": "en",
+  "content_hash": "sha256:9b1e...",
+  "creator": {
+    "id": "cr_12",
+    "name": "Example Garage",
+    "url": "https://example.com"
+  },
+  "page_url": "https://example.com/videos/carb",
+  "c2pa": {
+    "credentials_url": "https://example.com/c2pa/vid_8f2c"
+  },
+  "extensions": {
+    "com.mux": {
+      "playback_id": "abc"
+    }
+  }
+}

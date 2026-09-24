@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/rights-summary.schema.json",
+  "title": "ARV RightsSummary",
+  "description": "The public subset of the rights record for one moment. Terms map to RSL 1.0 where RSL has a word. entitlement and payment let discovery say a moment needs a linked account or payment before playback is requested.",
+  "type": "object",
+  "required": [
+    "arv",
+    "moment_uri",
+    "video",
+    "attribution_required",
+    "policy_version",
+    "expires_at"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "moment_uri": {
+      "type": "string",
+      "pattern": "^arv:[^#\\s]+#t=\\d+,\\d+$",
+      "description": "arv:{asset_id}#t={start_ms},{end_ms}. The canonical snapped range is the moment's identity."
+    },
+    "rsl": {
+      "type": "object",
+      "properties": {
+        "permits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prohibits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "payment": {
+          "type": "string"
+        }
+      }
+    },
+    "aipref": {
+      "type": "string",
+      "description": "IETF AIPREF Content-Usage value derived from the same rights record."
+    },
+    "video": {
+      "type": "object",
+      "required": [
+        "segment_display",
+        "full_video_display",
+        "clip"
+      ],
+      "properties": {
+        "segment_display": {
+          "type": "boolean"
+        },
+        "source_embed_display": {
+          "type": "boolean",
+          "description": "Absent means false."
+        },
+        "full_video_display": {
+          "type": "boolean"
+        },
+        "clip": {
+          "type": "boolean"
+        },
+        "quote_max_ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "attribution_required": {
+      "type": "boolean"
+    },
+    "policy_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "license_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "entitlement": {
+      "type": "object",
+      "description": "Entitlement needed to use this moment. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it.",
+      "required": [
+        "required",
+        "kind"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "kind": {
+          "enum": [
+            "none",
+            "account_link",
+            "subscription",
+            "purchase"
+          ]
+        },
+        "link_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "https URL where the user links an account or buys."
+        },
+        "provider": {
+          "type": "string"
+        }
+      }
+    },
+    "payment": {
+      "type": "object",
+      "description": "Payment needed to use this moment. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it.",
+      "required": [
+        "required",
+        "model"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "model": {
+          "enum": [
+            "free",
+            "per_use",
+            "per_view",
+            "subscription"
+          ]
+        },
+        "amount": {
+          "type": "object",
+          "required": [
+            "currency",
+            "minor_units"
+          ],
+          "properties": {
+            "currency": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$",
+              "description": "ISO 4217 currency code."
+            },
+            "minor_units": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Amount in the currency's minor units, for example cents."
+            }
+          }
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Payment methods the origin accepts, for example \"http-402\", \"stripe-agentic\", \"ap2\", \"wallet\"."
+        },
+        "challenge_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "https URL of the payment challenge."
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}
