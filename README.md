@@ -23,7 +23,7 @@ Three conformance levels: **L1** crawl-readable, **L2** agent-callable, **L3** r
 | [`examples/1.0/`](examples/1.0/) | Example objects. CI validates every one against its schema |
 | [`conformance/`](conformance/README.md) | The 18 checks and three levels as a checklist |
 | [`GOVERNANCE.md`](GOVERNANCE.md) | Who maintains ARV and how changes are made |
-| [`charter/DRAFT-charter.md`](charter/DRAFT-charter.md) | Draft charter for the W3C Community Group (not yet adopted) |
+| [`charter/DRAFT-charter.md`](charter/DRAFT-charter.md) | Draft charter for the W3C Community Group (not yet adopted). The group is [announced for support](https://www.w3.org/community/blog/2026/09/25/proposed-group-agent-ready-video-community-group/). |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to propose a change |
 | [`CHANGELOG.md`](CHANGELOG.md) | What changed and when |
 

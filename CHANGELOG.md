@@ -6,6 +6,10 @@ All notable changes to the ARV specification, schemas and examples.
 
 - Public source repository created with the spec text, schemas, examples, conformance checklist and CI checks.
 
+## 2026-09-25
+
+- W3C announced the Agent-Ready Video Community Group proposal for support: https://www.w3.org/community/blog/2026/09/25/proposed-group-agent-ready-video-community-group/. The group launches once five people support it.
+
 ## 2026-09-24
 
 - W3C Community Group proposal under staff review; AgentCDN will contribute the draft under the W3C CLA at launch; draft charter added.

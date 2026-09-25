@@ -16,7 +16,7 @@ A feature becomes **required** only after two independent implementations pass t
 
 ## W3C Community Group
 
-A W3C Community Group for Agent-Ready Video is **proposed** and under W3C staff review. It is not formed yet. When it forms, anyone with a free W3C account can join.
+A W3C Community Group for Agent-Ready Video is **announced for support** by W3C ([announcement](https://www.w3.org/community/blog/2026/09/25/proposed-group-agent-ready-video-community-group/)). It launches once five people support it, and anyone with a W3C account can support it from that page. It is not formed yet. When it forms, anyone with a free W3C account can join.
 
 At launch:
 
