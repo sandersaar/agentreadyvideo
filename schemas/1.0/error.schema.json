@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/error.schema.json",
+  "title": "ARV Error",
+  "description": "A typed error from any ARV tool or endpoint. Over HTTP it is the response body. Over MCP it is the structuredContent of a tool result with isError true.",
+  "type": "object",
+  "required": [
+    "arv",
+    "code",
+    "message"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "code": {
+      "anyOf": [
+        {
+          "enum": [
+            "invalid_request",
+            "not_found",
+            "rights_denied",
+            "entitlement_required",
+            "payment_required",
+            "revoked",
+            "rate_limited",
+            "internal"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(\\.[a-z0-9-]+)+/[a-z0-9_]+$",
+          "description": "An origin-specific code under a reverse-domain prefix, for example com.example/quota_exceeded."
+        }
+      ]
+    },
+    "message": {
+      "type": "string",
+      "description": "Plain text for a person or an agent. Not parsed."
+    },
+    "moment_uri": {
+      "type": "string",
+      "pattern": "^arv:[^#\\s]+#t=\\d+,\\d+$",
+      "description": "arv:{asset_id}#t={start_ms},{end_ms}. The canonical snapped range is the moment's identity."
+    },
+    "retry_after_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How long to wait before a retry. Required for rate_limited."
+    },
+    "challenge_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "description": "Where the user links an account or pays. Required for entitlement_required and payment_required."
+    },
+    "docs_url": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "enum": [
+              "entitlement_required",
+              "payment_required"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "challenge_url"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "const": "rate_limited"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "retry_after_ms"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true
+}

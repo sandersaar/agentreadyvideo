@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/answer.schema.json",
+  "title": "ARV Answer",
+  "description": "How a set of moments answers one question: the answer shape, how much of the question it covers, and the ordered moments with verbatim evidence. Discovery data: the forbidden-field rule applies.",
+  "type": "object",
+  "required": [
+    "arv",
+    "shape",
+    "coverage",
+    "references"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "question": {
+      "type": "string",
+      "description": "The question as the origin understood it."
+    },
+    "shape": {
+      "enum": [
+        "single_moment",
+        "multi_moment",
+        "steps",
+        "overview"
+      ],
+      "description": "single_moment: one moment answers it. multi_moment: several moments each answer part of it. steps: ordered steps to follow. overview: a broad summary across the source."
+    },
+    "coverage": {
+      "enum": [
+        "complete",
+        "partial",
+        "best_available"
+      ],
+      "description": "complete: the references answer the whole question. partial: they answer part of it. best_available: the closest the source has, not a direct answer."
+    },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Moments in the order a consumer shows them.",
+      "items": {
+        "type": "object",
+        "required": [
+          "moment_uri"
+        ],
+        "properties": {
+          "moment_uri": {
+            "type": "string",
+            "pattern": "^arv:[^#\\s]+#t=\\d+,\\d+$",
+            "description": "arv:{asset_id}#t={start_ms},{end_ms}. The canonical snapped range is the moment's identity."
+          },
+          "role": {
+            "enum": [
+              "answer",
+              "supporting",
+              "step"
+            ],
+            "description": "answer: it answers the question. supporting: it adds context. step: one step of a steps answer."
+          },
+          "step_index": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-based position of the step. Only on role step."
+          },
+          "span": {
+            "allOf": [
+              {
+                "$ref": "moment.schema.json#/$defs/evidence_span"
+              }
+            ],
+            "required": [
+              "text"
+            ],
+            "description": "Verbatim evidence that justifies the reference. Lies inside the referenced range."
+          }
+        },
+        "dependentSchemas": {
+          "step_index": {
+            "required": [
+              "role"
+            ],
+            "properties": {
+              "role": {
+                "const": "step"
+              }
+            }
+          }
+        },
+        "if": {
+          "required": [
+            "role"
+          ],
+          "properties": {
+            "role": {
+              "const": "step"
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "step_index"
+          ]
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "description": "Links the publisher offers with this answer.",
+      "items": {
+        "$ref": "moment.schema.json#/$defs/action"
+      }
+    }
+  },
+  "additionalProperties": true
+}

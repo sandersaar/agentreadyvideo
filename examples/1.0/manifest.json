@@ -13,7 +13,10 @@
   "tool_profiles": {
     "mcp_origin": {
       "url": "https://example.com/mcp",
-      "version": "1.0"
+      "version": "1.0",
+      "aliases": {
+        "search_moments": "find_moments"
+      }
     },
     "webmcp_page": {
       "adapter": "https://example.com/webmcp/v1/adapter.js",

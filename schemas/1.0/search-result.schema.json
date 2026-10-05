@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/search-result.schema.json",
+  "title": "ARV SearchResult",
+  "description": "What search_moments returns: moments, an optional answer and a paging cursor. Discovery data: the forbidden-field rule applies.",
+  "type": "object",
+  "required": [
+    "arv",
+    "moments"
+  ],
+  "properties": {
+    "arv": {
+      "const": "1.0",
+      "description": "ARV version. Every ARV object carries \"arv\": \"1.0\"."
+    },
+    "query": {
+      "type": "string"
+    },
+    "moments": {
+      "type": "array",
+      "description": "Matching moments, best first. Each resolves through get_moment to the same range.",
+      "items": {
+        "$ref": "moment.schema.json"
+      }
+    },
+    "answer": {
+      "$ref": "answer.schema.json"
+    },
+    "next_cursor": {
+      "type": "string",
+      "description": "Opaque cursor for the next page. Absent on the last page."
+    }
+  },
+  "additionalProperties": true
+}

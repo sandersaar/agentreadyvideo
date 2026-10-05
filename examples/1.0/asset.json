@@ -14,6 +14,21 @@
   "c2pa": {
     "credentials_url": "https://example.com/c2pa/vid_8f2c"
   },
+  "speakers": [
+    {
+      "id": "spk_1",
+      "name": "Sam",
+      "name_source": "on_screen_text"
+    }
+  ],
+  "actions": [
+    {
+      "label": "Book a tune-up",
+      "action": "book",
+      "kind": "service",
+      "url": "https://example.com/book"
+    }
+  ],
   "extensions": {
     "com.mux": {
       "playback_id": "abc"
