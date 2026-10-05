@@ -20,7 +20,7 @@ Changes from what implementers learned while building ingestion and retrieval. A
 - Added Product (3.10) and Action (3.11) as optional sub-objects on Moment and Asset (Action also on Answer). Product and action URLs are https and never media URLs.
 - Added Error (3.12) and section 4.4: one error object with core codes, carried as the HTTP body or as an MCP tool result with `isError: true`. `entitlement_required` and `payment_required` carry the `challenge_url`, so the 402 or 403 rule works over MCP too.
 - Added optional Moment `kind` (`chapter`, `shot`, `window`, `span`), `summary` and `visual_description`.
-- Added optional Asset `speakers` and transcript evidence `speaker_id`. A name needs a `name_source`. A producer SHOULD NOT publish a name from face or voice recognition alone.
+- Added optional Asset `speakers` and transcript evidence `speaker_id`. A name needs a `name_source`. A producer MUST NOT publish a name from face or voice recognition alone.
 - Added a caching rule to RightsSummary: nothing derived from a summary is used after `expires_at`.
 - The Moment `aliases` example no longer uses a vendor's legacy id prefix.
 - Schemas: new `answer`, `search-result` and `error` schemas, with examples. `npm test` checks answer spans, step order, speaker ids and forbidden fields in discovery examples.

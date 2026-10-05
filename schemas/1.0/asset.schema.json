@@ -78,7 +78,7 @@
           },
           "name": {
             "type": "string",
-            "description": "Present only when name_source backs it. Not from face or voice recognition alone."
+            "description": "Present only when name_source backs it. MUST NOT come from face or voice recognition alone."
           },
           "name_source": {
             "enum": [

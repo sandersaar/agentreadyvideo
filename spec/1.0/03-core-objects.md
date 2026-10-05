@@ -12,7 +12,7 @@ One video as published by an origin. Schema: [`asset.schema.json`](../../schemas
 - `duration_ms` MUST be present. Every moment on the asset lies inside it.
 - `content_hash` SHOULD be present, as `sha256:` plus lowercase hex.
 - `c2pa` MAY point to Content Credentials for the asset.
-- `speakers` MAY list the people who speak in the asset. Each has an `id` that is unique within the asset. A speaker carries a `name` only together with `name_source`: `spoken` (said in the video), `on_screen_text` (shown on screen) or `metadata` (in the publisher's own data). A producer SHOULD NOT publish a person's name from face or voice recognition alone.
+- `speakers` MAY list the people who speak in the asset. Each has an `id` that is unique within the asset. A speaker carries a `name` only together with `name_source`: `spoken` (said in the video), `on_screen_text` (shown on screen) or `metadata` (in the publisher's own data). A producer MUST NOT publish a person's name from face or voice recognition alone.
 - `products` and `actions` MAY be present for the whole asset, with the shapes in sections 3.10 and 3.11. Product evidence spans lie inside `duration_ms`.
 - Vendor data MUST live under `extensions`, keyed by a reverse-domain name such as `com.example`. Core fields MUST NOT carry vendor-specific values.
 
