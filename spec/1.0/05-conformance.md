@@ -7,7 +7,7 @@ The validator is not released yet. Until it is, use the [conformance checklist](
 ## L1 crawl-readable
 
 1. `/.well-known/arv` returns 200 JSON that validates against the manifest schema.
-2. Every catalog URL returns a valid catalog. Every moment has `start_ms < end_ms`, both inside `duration_ms`, and a recomputable `id`.
+2. Every catalog URL returns a valid catalog. Every moment has `start_ms < end_ms`, both inside `duration_ms`, and a recomputable `id`. No `moment_url` carries an end in a Media Fragment.
 3. Every evidence span lies inside its moment range.
 4. At least one sampled page carries JSON-LD `VideoObject` whose Clip `@id` values match catalog `moment_uri` values.
 5. A sitemap is reachable from robots.txt, and listed video pages return 200.
@@ -17,9 +17,9 @@ The validator is not released yet. Until it is, use the [conformance checklist](
 
 ## L2 agent-callable (L1 plus)
 
-9. The MCP endpoint lists the origin profile names or declared aliases. Each input and result validates.
-10. `search_moments` returns moments that resolve through `get_moment` to the same range.
-11. No forbidden field appears in any search, ask or list result, fuzzed over 20 queries.
+9. The MCP endpoint lists each origin profile name, or the name the manifest declares for it in `tool_profiles.mcp_origin.aliases`. Each input and result validates against the schema section 4.2 names.
+10. `search_moments` returns a SearchResult whose moments resolve through `get_moment` to the same range.
+11. No forbidden field appears in any search, ask or list result, including any Answer, Product or Action in it, fuzzed over 20 queries.
 12. `play_moment` returns a descriptor whose token expires within 15 minutes and fails after expiry.
 13. If a WebMCP adapter is declared, a headless run registers exactly the page profile tools.
 14. If NLWeb or A2A is declared, the endpoint responds and items carry `moment_uri`.
@@ -27,11 +27,11 @@ The validator is not released yet. Until it is, use the [conformance checklist](
 ## L3 rights and ledger (L2 plus)
 
 15. `jwks_url` serves keys, and playback tokens and receipts verify against them.
-16. Negative tests pass: a moment with `segment_display=false` yields no descriptor; a revoked policy stops a live token; an agent outside scope is refused; a quote over `quote_max_ms` is refused.
+16. Negative tests pass: a moment with `segment_display=false` yields no descriptor; a revoked policy stops a live token; an agent outside scope is refused; a quote over `quote_max_ms` is refused. Each refusal is an Error with the matching code (section 4.4).
 17. `record_usage` returns a signed receipt that references a resolvable moment.
 18. RSL, the AIPREF header and the RightsSummary agree for sampled moments.
 
-An L3 origin that sets `required: true` on `entitlement` or `payment` also follows the 402 or 403 rule in section 3.3.1.
+An L3 origin that sets `required: true` on `entitlement` or `payment` also follows the 402 or 403 rule in section 3.3.1. Over MCP, the refusal is an Error with code `entitlement_required` or `payment_required`.
 
 ## The badge
 

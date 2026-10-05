@@ -11,7 +11,7 @@ A level counts only when every check at that level and every lower level passes.
 For a publisher with files alone and no server code.
 
 - [ ] 1. `/.well-known/arv` returns 200 JSON that validates against [`manifest.schema.json`](../schemas/1.0/manifest.schema.json).
-- [ ] 2. Every catalog URL returns a valid catalog. Every moment has `start_ms < end_ms`, both inside `duration_ms`, and a recomputable `id`.
+- [ ] 2. Every catalog URL returns a valid catalog. Every moment has `start_ms < end_ms`, both inside `duration_ms`, and a recomputable `id`. No `moment_url` carries an end in a Media Fragment (use `#t=12.4`, not `#t=12.4,31`).
 - [ ] 3. Every evidence span lies inside its moment range.
 - [ ] 4. At least one sampled page carries JSON-LD `VideoObject` whose Clip `@id` values match catalog `moment_uri` values.
 - [ ] 5. A sitemap is reachable from robots.txt, and listed video pages return 200.
@@ -23,9 +23,9 @@ For a publisher with files alone and no server code.
 
 For a publisher with an MCP endpoint.
 
-- [ ] 9. The MCP endpoint lists the origin profile names (`search_moments`, `get_moment`, `get_rights`, `play_moment`, `record_usage`, `search`, `fetch`) or declared aliases. Each input and result validates.
-- [ ] 10. `search_moments` returns moments that resolve through `get_moment` to the same range.
-- [ ] 11. No forbidden field appears in any search, ask or list result, fuzzed over 20 queries.
+- [ ] 9. The MCP endpoint lists the origin profile names (`search_moments`, `get_moment`, `get_rights`, `play_moment`, `record_usage`, `search`, `fetch`). A server that uses other names declares each one in the manifest at `tool_profiles.mcp_origin.aliases` (`search` and `fetch` cannot be aliased). Each input and result validates ([section 4.2](../spec/1.0/04-bindings.md#42-inference-time)).
+- [ ] 10. `search_moments` returns a SearchResult whose moments resolve through `get_moment` to the same range.
+- [ ] 11. No forbidden field appears in any search, ask or list result, including any Answer, Product or Action in it, fuzzed over 20 queries. Signed or scoped stream URLs count as forbidden fields.
 - [ ] 12. `play_moment` returns a descriptor whose token expires within 15 minutes and fails after expiry.
 - [ ] 13. If a WebMCP adapter is declared, a headless run registers exactly the page profile tools.
 - [ ] 14. If NLWeb or A2A is declared, the endpoint responds and items carry `moment_uri`.
@@ -35,8 +35,8 @@ For a publisher with an MCP endpoint.
 For a publisher that signs tokens and receipts.
 
 - [ ] 15. `jwks_url` serves keys, and playback tokens and receipts verify against them.
-- [ ] 16. Negative tests pass: a moment with `segment_display=false` yields no descriptor; a revoked policy stops a live token; an agent outside scope is refused; a quote over `quote_max_ms` is refused.
+- [ ] 16. Negative tests pass: a moment with `segment_display=false` yields no descriptor; a revoked policy stops a live token; an agent outside scope is refused; a quote over `quote_max_ms` is refused. Each refusal is an Error with the matching code ([section 4.4](../spec/1.0/04-bindings.md#44-errors)).
 - [ ] 17. `record_usage` returns a signed receipt that references a resolvable moment.
 - [ ] 18. RSL, the AIPREF header and the RightsSummary agree for sampled moments.
 
-If your origin sets `required: true` on `entitlement` or `payment`, it must also answer a token request without them with HTTP 402 or 403 and the challenge URL ([section 3.3.1](../spec/1.0/03-core-objects.md#331-entitlement-and-payment)).
+If your origin sets `required: true` on `entitlement` or `payment`, it must also answer a token request without them with HTTP 402 or 403 (over MCP, an Error with code `entitlement_required` or `payment_required`) and the challenge URL ([section 3.3.1](../spec/1.0/03-core-objects.md#331-entitlement-and-payment)).

@@ -1,0 +1,8 @@
+{
+  "arv": "1.0",
+  "code": "entitlement_required",
+  "message": "This moment needs a linked account.",
+  "moment_uri": "arv:vid_8f2c#t=12400,31000",
+  "challenge_url": "https://example.com/account/link?moment=vid_8f2c",
+  "docs_url": "https://example.com/docs/errors#entitlement_required"
+}

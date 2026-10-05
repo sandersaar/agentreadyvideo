@@ -1,48 +1,6 @@
 {
   "arv": "1.0",
-  "origin": "https://example.com",
-  "publisher": {
-    "name": "Example Garage"
-  },
-  "assets": [
-    {
-      "arv": "1.0",
-      "id": "vid_8f2c",
-      "title": "Tuning a carburettor",
-      "duration_ms": 1284000,
-      "language": "en",
-      "content_hash": "sha256:9b1e...",
-      "creator": {
-        "id": "cr_12",
-        "name": "Example Garage",
-        "url": "https://example.com"
-      },
-      "page_url": "https://example.com/videos/carb",
-      "c2pa": {
-        "credentials_url": "https://example.com/c2pa/vid_8f2c"
-      },
-      "speakers": [
-        {
-          "id": "spk_1",
-          "name": "Sam",
-          "name_source": "on_screen_text"
-        }
-      ],
-      "actions": [
-        {
-          "label": "Book a tune-up",
-          "action": "book",
-          "kind": "service",
-          "url": "https://example.com/book"
-        }
-      ],
-      "extensions": {
-        "com.mux": {
-          "playback_id": "abc"
-        }
-      }
-    }
-  ],
+  "query": "idle mixture screw",
   "moments": [
     {
       "arv": "1.0",
@@ -97,5 +55,44 @@
         "legacy_2b7c"
       ]
     }
-  ]
+  ],
+  "answer": {
+    "arv": "1.0",
+    "question": "How do I set the idle mixture on a carburettor?",
+    "shape": "steps",
+    "coverage": "complete",
+    "references": [
+      {
+        "moment_uri": "arv:vid_8f2c#t=12400,31000",
+        "role": "step",
+        "step_index": 1,
+        "span": {
+          "type": "transcript",
+          "start_ms": 12900,
+          "end_ms": 18200,
+          "text": "Turn the mixture screw a quarter turn out"
+        }
+      },
+      {
+        "moment_uri": "arv:vid_8f2c#t=31000,52000",
+        "role": "step",
+        "step_index": 2,
+        "span": {
+          "type": "transcript",
+          "start_ms": 33500,
+          "end_ms": 39000,
+          "text": "Then turn it back in until the idle is smooth"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "Book a tune-up",
+        "action": "book",
+        "kind": "service",
+        "url": "https://example.com/book"
+      }
+    ]
+  },
+  "next_cursor": "c_2"
 }

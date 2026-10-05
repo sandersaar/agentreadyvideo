@@ -62,6 +62,54 @@
         }
       }
     },
+    "speakers": {
+      "type": "array",
+      "description": "People who speak in the asset. Transcript evidence spans point here with speaker_id.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Unique within the asset."
+          },
+          "name": {
+            "type": "string",
+            "description": "Present only when name_source backs it. MUST NOT come from face or voice recognition alone."
+          },
+          "name_source": {
+            "enum": [
+              "spoken",
+              "on_screen_text",
+              "metadata"
+            ],
+            "description": "Where the name comes from: said in the video, shown on screen, or in the publisher metadata."
+          }
+        },
+        "dependentRequired": {
+          "name": [
+            "name_source"
+          ]
+        }
+      }
+    },
+    "products": {
+      "type": "array",
+      "description": "Products, services or works the asset shows or mentions.",
+      "items": {
+        "$ref": "moment.schema.json#/$defs/product"
+      }
+    },
+    "actions": {
+      "type": "array",
+      "description": "Links the publisher offers the viewer for this asset.",
+      "items": {
+        "$ref": "moment.schema.json#/$defs/action"
+      }
+    },
     "extensions": {
       "type": "object",
       "description": "Vendor data keyed by reverse domain, for example \"com.mux\".",

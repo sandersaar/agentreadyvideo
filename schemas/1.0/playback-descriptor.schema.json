@@ -36,7 +36,7 @@
         "type": "integer",
         "minimum": 0
       },
-      "description": "More start times in milliseconds, for a multi-step answer."
+      "description": "More start times in milliseconds. After a steps answer, the start of each later step on the same asset, in step_index order."
     },
     "sources": {
       "type": "array",
@@ -65,7 +65,8 @@
           },
           "embed_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "Iframe player URL. Carries no end parameter; the start goes in start_param."
           },
           "start_ms": {
             "type": "integer",

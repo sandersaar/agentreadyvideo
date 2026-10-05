@@ -68,6 +68,23 @@
             },
             "version": {
               "type": "string"
+            },
+            "aliases": {
+              "type": "object",
+              "description": "Maps an origin profile tool name to the name the server serves it under. search and fetch cannot be aliased.",
+              "propertyNames": {
+                "enum": [
+                  "search_moments",
+                  "get_moment",
+                  "get_rights",
+                  "play_moment",
+                  "record_usage"
+                ]
+              },
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
             }
           }
         },

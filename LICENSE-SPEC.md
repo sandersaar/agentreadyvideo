@@ -8,7 +8,7 @@ AgentCDN will contribute the current draft of the spec text to the W3C Agent-Rea
 
 ## Until launch
 
-The Community Group is proposed and under W3C staff review. It is not formed yet. Until it launches:
+The Community Group is proposed. W3C announced it for support on 2026-09-25. It is not formed yet. Until it launches:
 
 - Contributions to the spec text are accepted under the same terms as the [W3C Community Contributor License Agreement](https://www.w3.org/community/about/process/cla/), including its patent commitments. By opening a pull request or issue that changes the spec text, you agree to those terms for your contribution.
 - The spec text in this repo is published as a draft for review and implementation. You may read it, implement it and quote it.
