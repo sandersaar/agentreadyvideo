@@ -132,6 +132,12 @@
       "format": "uri",
       "pattern": "^https://",
       "description": "The origin's payment terms. Defined in 1.0, implementation optional. A conforming L3 origin that sets required=true must also return 402 or 403 with the challenge_url when a token is requested without it."
+    },
+    "usage_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "description": "The REST form of record_usage. POST a moment, an action and optionally served_to; the origin returns a signed UsageReceipt. Defined in 1.0, implementation optional."
     }
   },
   "additionalProperties": true

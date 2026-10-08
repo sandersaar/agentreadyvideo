@@ -283,7 +283,7 @@ A signed record that an agent served a moment. Schema: [`usage-receipt.schema.js
 - `moment_uri` and `moment_id` MUST resolve to a moment at the origin.
 - `action` names what was done, using the terms in the RightsSummary, for example `segment_display`.
 - `policy_version` MUST be the rights policy in force when the moment was served.
-- `jws` MUST be a compact JWS over the receipt, verifiable with a key from the origin's `jwks_url`.
+- `jws` MUST be a compact JWS over the receipt, verifiable with a key from the origin's `jwks_url`. Its protected header MUST carry the `kid` of that key. If the origin signs playback tokens with the same key, the header `typ` MUST differ from the token `typ`, so a token never verifies as a receipt.
 - `payment_ref` and `entitlement_ref` MAY point at what paid for or unlocked the use. Both are defined in 1.0 and optional to implement.
 
 Example: [`examples/1.0/usage-receipt.json`](../../examples/1.0/usage-receipt.json)
@@ -317,6 +317,7 @@ Served at `/.well-known/arv` as JSON. It is the entry point for every validator 
 - `jwks_url` is REQUIRED at L3.
 - `schema` SHOULD point to the manifest schema for the version in use.
 - `entitlement_url` MAY name where users link accounts or manage entitlements for the origin. `payment_terms_url` MAY name the origin's payment terms. Both MUST use https.
+- `usage_url` MAY name the REST form of `record_usage`. It MUST use https. An agent sends `POST {usage_url}` with a JSON body naming the moment (`moment_uri`, or `asset_id` with `start_ms` and `end_ms`), the `action`, and optionally `served_to`. The origin answers 200 with a UsageReceipt, 400 for a malformed or out-of-range moment, and 403 when the rights in force do not permit the action. An origin that serves `record_usage` over MCP SHOULD also declare `usage_url`, so agents without MCP can report use.
 
 Example: [`examples/1.0/manifest.json`](../../examples/1.0/manifest.json)
 
@@ -352,7 +353,8 @@ Example: [`examples/1.0/manifest.json`](../../examples/1.0/manifest.json)
   "validator_report": "https://agentreadyvideo.org/validator/r/example.com/2026-09-23",
   "schema": "https://agentreadyvideo.org/schema/1.0/manifest.schema.json",
   "entitlement_url": "https://example.com/account/link",
-  "payment_terms_url": "https://example.com/terms/payment"
+  "payment_terms_url": "https://example.com/terms/payment",
+  "usage_url": "https://example.com/arv/usage"
 }
 ```
 
