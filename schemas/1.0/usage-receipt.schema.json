@@ -48,7 +48,8 @@
         "surface": {
           "type": "string"
         }
-      }
+      },
+      "description": "agent is the caller identity the origin verified, or unverified; never a name the caller only claimed. surface may be what the caller reported."
     },
     "policy_version": {
       "type": "integer",
@@ -63,7 +64,7 @@
     },
     "jws": {
       "type": "string",
-      "description": "Compact JWS over the receipt, verifiable with the origin's jwks_url."
+      "description": "Compact JWS over the receipt without jws. Protected header: typ arv-receipt+jwt and the kid of a key in the origin's jwks_url."
     },
     "payment_ref": {
       "type": "string",

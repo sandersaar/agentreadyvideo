@@ -1,0 +1,9 @@
+{
+  "moment_uri": "arv:vid_8f2c#t=12400,31000",
+  "moment_id": "mom_rg2e4kdenkmkzilboihacumshn",
+  "action": "segment_display",
+  "served_to": {
+    "agent": "chatgpt",
+    "surface": "chat"
+  }
+}
