@@ -51,7 +51,7 @@
         }
       },
       "additionalProperties": false,
-      "description": "Self-asserted. Not proof of display."
+      "description": "Self-asserted. The origin may record it; the receipt's served_to.agent is always the verified caller or unverified."
     }
   },
   "anyOf": [

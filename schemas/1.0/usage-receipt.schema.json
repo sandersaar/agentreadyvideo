@@ -49,7 +49,7 @@
           "type": "string"
         }
       },
-      "description": "Who the moment was served to, as the caller asserted it. If the caller sent none, agent is the verified caller identity or unverified."
+      "description": "agent is the caller identity the origin verified, or unverified; never a name the caller only claimed. surface may be what the caller reported."
     },
     "policy_version": {
       "type": "integer",
