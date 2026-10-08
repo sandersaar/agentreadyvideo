@@ -137,8 +137,13 @@
       "type": "string",
       "format": "uri",
       "pattern": "^https://",
-      "description": "The REST form of record_usage. POST a moment, an action and optionally served_to; the origin returns a signed UsageReceipt. Defined in 1.0, implementation optional."
+      "description": "The REST form of record_usage (spec section 3.5.1). POST a usage request; the origin returns a signed UsageReceipt. Requires jwks_url. Defined in 1.0, implementation optional."
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "dependentRequired": {
+    "usage_url": [
+      "jwks_url"
+    ]
+  }
 }

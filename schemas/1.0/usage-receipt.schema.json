@@ -48,7 +48,8 @@
         "surface": {
           "type": "string"
         }
-      }
+      },
+      "description": "Who the moment was served to, as the caller asserted it. If the caller sent none, agent is the verified caller identity or unverified."
     },
     "policy_version": {
       "type": "integer",
@@ -63,7 +64,7 @@
     },
     "jws": {
       "type": "string",
-      "description": "Compact JWS over the receipt, verifiable with the origin's jwks_url."
+      "description": "Compact JWS over the receipt without jws. Protected header: typ arv-receipt+jwt and the kid of a key in the origin's jwks_url."
     },
     "payment_ref": {
       "type": "string",

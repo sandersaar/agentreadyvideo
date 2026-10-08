@@ -283,7 +283,8 @@ A signed record that an agent served a moment. Schema: [`usage-receipt.schema.js
 - `moment_uri` and `moment_id` MUST resolve to a moment at the origin.
 - `action` names what was done, using the terms in the RightsSummary, for example `segment_display`.
 - `policy_version` MUST be the rights policy in force when the moment was served.
-- `jws` MUST be a compact JWS over the receipt, verifiable with a key from the origin's `jwks_url`. Its protected header MUST carry the `kid` of that key. If the origin signs playback tokens with the same key, the header `typ` MUST differ from the token `typ`, so a token never verifies as a receipt.
+- `jws` MUST be a compact JWS over the receipt without its `jws` member, verifiable with a key from the origin's `jwks_url`. Its protected header MUST carry `typ: "arv-receipt+jwt"` and the `kid` of that key. A verifier MUST reject a receipt with any other `typ`, a `kid` that is not in `jwks_url`, or a signed payload that differs from the receipt's other members. So a playback token signed with the same key never verifies as a receipt.
+- `served_to` records who the moment was served to, as the caller asserted it. It is not proof of display.
 - `payment_ref` and `entitlement_ref` MAY point at what paid for or unlocked the use. Both are defined in 1.0 and optional to implement.
 
 Example: [`examples/1.0/usage-receipt.json`](../../examples/1.0/usage-receipt.json)
@@ -302,8 +303,34 @@ Example: [`examples/1.0/usage-receipt.json`](../../examples/1.0/usage-receipt.js
   "policy_version": 7,
   "served_at": "2026-09-23T12:00:04Z",
   "citation": "Example Garage, Tuning a carburettor, 0:12",
-  "jws": "eyJhbGciOiJFUzI1NiIsImtpZCI6ImstMjAyNi0wOSJ9...",
+  "jws": "eyJhbGciOiJFUzI1NiIsInR5cCI6ImFydi1yZWNlaXB0K2p3dCIsImtpZCI6ImstMjAyNi0wOSJ9...",
   "entitlement_ref": "ent_free_public"
+}
+```
+
+### 3.5.1 Reporting use
+
+An agent reports a use with the `record_usage` tool (section 4) or with `POST {usage_url}` (section 3.6). Both take the same request and give the same answer. Request schema: [`usage-request.schema.json`](../../schemas/1.0/usage-request.schema.json).
+
+- The request names the moment by `moment_uri`, or by `asset_id` with `start_ms` and `end_ms`. If both forms are sent, they MUST name the same range. `moment_id` MAY be sent as a cross-check and MUST then equal the id recomputed from the range. It cannot name a moment alone, because it is a one-way hash.
+- `action` names the use. An action that the rights in force do not define or do not permit is refused.
+- `served_to` is optional and self-asserted. If it is absent, the origin MUST fill `served_to.agent` in the receipt from the caller identity it verified, or with `unverified`.
+- On success the origin answers 200 with a UsageReceipt and records the use.
+- Errors answer with a JSON body `{"error": code}`. The codes are `moment_invalid` (400: a malformed moment, a range outside the asset, or a `moment_id` that does not recompute), `asset_not_found` (404: an unknown, private or unpublished asset), `action_not_permitted` (403: the rights in force do not permit the action) and `quote_over_limit` (403: a `quote` longer than `quote_max_ms`). An error never carries a receipt.
+- When the refusal is a missing entitlement or payment, the 402 or 403 rule in 3.3.1 applies, with the `challenge_url`.
+- A receipt records what the caller asserted and what the origin permitted. It does not authenticate the caller. Origins SHOULD rate-limit `record_usage` and `usage_url`.
+
+Example: [`examples/1.0/usage-request.json`](../../examples/1.0/usage-request.json)
+
+```json
+{
+  "moment_uri": "arv:vid_8f2c#t=12400,31000",
+  "moment_id": "mom_rg2e4kdenkmkzilboihacumshn",
+  "action": "segment_display",
+  "served_to": {
+    "agent": "chatgpt",
+    "surface": "chat"
+  }
 }
 ```
 
@@ -317,7 +344,7 @@ Served at `/.well-known/arv` as JSON. It is the entry point for every validator 
 - `jwks_url` is REQUIRED at L3.
 - `schema` SHOULD point to the manifest schema for the version in use.
 - `entitlement_url` MAY name where users link accounts or manage entitlements for the origin. `payment_terms_url` MAY name the origin's payment terms. Both MUST use https.
-- `usage_url` MAY name the REST form of `record_usage`. It MUST use https. An agent sends `POST {usage_url}` with a JSON body naming the moment (`moment_uri`, or `asset_id` with `start_ms` and `end_ms`), the `action`, and optionally `served_to`. The origin answers 200 with a UsageReceipt, 400 for a malformed or out-of-range moment, and 403 when the rights in force do not permit the action. An origin that serves `record_usage` over MCP SHOULD also declare `usage_url`, so agents without MCP can report use.
+- `usage_url` MAY name the REST form of `record_usage`: `POST {usage_url}` takes the request and gives the answers in 3.5.1. It MUST use https. A manifest that declares `usage_url` MUST also declare `jwks_url`, so its receipts can be verified. An origin that serves `record_usage` over MCP SHOULD also declare `usage_url`, so agents without MCP can report use.
 
 Example: [`examples/1.0/manifest.json`](../../examples/1.0/manifest.json)
 

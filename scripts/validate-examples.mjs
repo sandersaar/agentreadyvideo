@@ -112,6 +112,11 @@ const negatives = [
   ["payment with http challenge_url", "playback-descriptor", (d) => { d.payment = { required: true, model: "per_view", challenge_url: "http://example.com/pay" }; }],
   ["payment with lowercase currency", "rights-summary", (d) => { d.payment = { required: true, model: "per_use", amount: { currency: "usd", minor_units: 50 } }; }],
   ["descriptor without start_ms", "playback-descriptor", (d) => { delete d.start_ms; }],
+  ["manifest with http usage_url", "manifest", (d) => { d.usage_url = "http://example.com/arv/usage"; }],
+  ["manifest with usage_url and no jwks_url", "manifest", (d) => { delete d.jwks_url; }],
+  ["usage request with no moment", "usage-request", (d) => { delete d.moment_uri; }],
+  ["usage request with asset_id and no range", "usage-request", (d) => { delete d.moment_uri; d.asset_id = "vid_8f2c"; }],
+  ["usage request with unknown member", "usage-request", (d) => { d.extra = true; }],
 ];
 for (const [label, name, mutate] of negatives) {
   const doc = structuredClone(examples[`${name}.json`]);

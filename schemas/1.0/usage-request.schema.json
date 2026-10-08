@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentreadyvideo.org/schema/1.0/usage-request.schema.json",
+  "title": "ARV usage request",
+  "description": "The input of record_usage and the body of POST {usage_url}. Names a moment by moment_uri, or by asset_id with start_ms and end_ms.",
+  "type": "object",
+  "required": [
+    "action"
+  ],
+  "properties": {
+    "moment_uri": {
+      "type": "string",
+      "pattern": "^arv:[^#\\s]+#t=\\d+,\\d+$",
+      "description": "arv:{asset_id}#t={start_ms},{end_ms}."
+    },
+    "asset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "start_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "end_ms": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "moment_id": {
+      "type": "string",
+      "pattern": "^mom_[a-z2-7]{26}$",
+      "description": "Optional cross-check. Must equal the id recomputed from the range. Cannot name a moment alone."
+    },
+    "action": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$",
+      "description": "The use, for example segment_display, clip or quote."
+    },
+    "served_to": {
+      "type": "object",
+      "required": [
+        "agent"
+      ],
+      "properties": {
+        "agent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "surface": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "description": "Self-asserted. Not proof of display."
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "moment_uri"
+      ]
+    },
+    {
+      "required": [
+        "asset_id",
+        "start_ms",
+        "end_ms"
+      ]
+    }
+  ],
+  "dependentRequired": {
+    "asset_id": [
+      "start_ms",
+      "end_ms"
+    ],
+    "start_ms": [
+      "asset_id",
+      "end_ms"
+    ],
+    "end_ms": [
+      "asset_id",
+      "start_ms"
+    ]
+  },
+  "additionalProperties": false
+}

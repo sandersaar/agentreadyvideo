@@ -36,7 +36,7 @@ For a publisher that signs tokens and receipts.
 
 - [ ] 15. `jwks_url` serves keys, and playback tokens and receipts verify against them.
 - [ ] 16. Negative tests pass: a moment with `segment_display=false` yields no descriptor; a revoked policy stops a live token; an agent outside scope is refused; a quote over `quote_max_ms` is refused.
-- [ ] 17. `record_usage` returns a signed receipt that references a resolvable moment. If `usage_url` is declared, `POST {usage_url}` does the same.
+- [ ] 17. `record_usage` returns a signed receipt that references a resolvable moment, and so does `POST {usage_url}` if it is declared. The receipt header carries `typ: "arv-receipt+jwt"` and a `kid` found in `jwks_url`. Negative tests pass: a malformed `moment_uri` and a range outside `duration_ms` each get 400 `moment_invalid`; an action the RightsSummary denies gets 403 `action_not_permitted`; none of them returns a receipt; a playback token placed in a receipt's `jws` fails verification.
 - [ ] 18. RSL, the AIPREF header and the RightsSummary agree for sampled moments.
 
 If your origin sets `required: true` on `entitlement` or `payment`, it must also answer a token request without them with HTTP 402 or 403 and the challenge URL ([section 3.3.1](../spec/1.0/03-core-objects.md#331-entitlement-and-payment)).
