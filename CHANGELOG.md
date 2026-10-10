@@ -4,6 +4,7 @@ All notable changes to the ARV specification, schemas and examples.
 
 ## Unreleased
 
+- Added optional `idempotency_key` to `usage-request.schema.json` (section 3.5.1). A repeat of a recorded report by the same caller, for the same moment, action and key, within the origin's dedupe window, returns the original receipt and records no second use.
 - Added section 3.5.1 Reporting use and `usage-request.schema.json`: one request for `record_usage` and the new optional Manifest `usage_url` (https, requires `jwks_url`). Errors are `{"error": code}` with `moment_invalid` (400), `asset_not_found` (404), `action_not_permitted` and `quote_over_limit` (403). A receipt's `served_to.agent` is always the verified caller or `unverified`, never a caller claim.
 - A UsageReceipt JWS header MUST carry `typ: "arv-receipt+jwt"` and a `kid` in `jwks_url`, and verifiers reject any other `typ`. Conformance check 17 adds negative tests.
 - Public source repository created with the spec text, schemas, examples, conformance checklist and CI checks.
