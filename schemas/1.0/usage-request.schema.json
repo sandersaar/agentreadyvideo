@@ -52,6 +52,11 @@
       },
       "additionalProperties": false,
       "description": "Self-asserted. The origin may record it; the receipt's served_to.agent is always the verified caller or unverified."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:-]{1,128}$",
+      "description": "Optional. The caller's key for this report. A repeat by the same caller, for the same moment, action and key, within the origin's dedupe window, returns the original receipt and records no new use. Send a new key for each separate use and the same key on retry."
     }
   },
   "anyOf": [
