@@ -9,6 +9,10 @@ All notable changes to the ARV specification, schemas and examples.
 - A UsageReceipt JWS header MUST carry `typ: "arv-receipt+jwt"` and a `kid` in `jwks_url`, and verifiers reject any other `typ`. Conformance check 17 adds negative tests.
 - Public source repository created with the spec text, schemas, examples, conformance checklist and CI checks.
 
+## 2026-10-05
+
+- IANA registered `arv` as a provisional URI scheme: https://www.iana.org/assignments/uri-schemes/prov/arv. Contact: team@agentreadyvideo.org. Change controller: AgentCDN, on behalf of the proposed Agent-Ready Video Community Group at W3C. References: https://agentreadyvideo.org/spec/1.0 (section 3.2 Moment) and https://agentreadyvideo.org/schema/1.0/moment.schema.json.
+
 ## 2026-09-25
 
 - W3C announced the Agent-Ready Video Community Group proposal for support: https://www.w3.org/community/blog/2026/09/25/proposed-group-agent-ready-video-community-group/. The group launches once five people support it.
