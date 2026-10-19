@@ -12,6 +12,7 @@ One video as published by an origin. Schema: [`asset.schema.json`](../../schemas
 - `duration_ms` MUST be present. Every moment on the asset lies inside it.
 - `content_hash` SHOULD be present, as `sha256:` plus lowercase hex.
 - `c2pa` MAY point to Content Credentials for the asset.
+- `modified_at` MAY be present: an RFC 3339 time in UTC, for example `2026-10-16T09:30:00.123Z`. It is the time anything public about the asset last changed: title, description, moments, transcript, rights, availability or publication state. It MUST NOT move backwards. It SHOULD NOT move when nothing public changed, and a client MUST expect a move with no visible difference. It moves when an asset becomes available again after a removal. It is a change marker, not a publish date. A producer that sends it for one asset SHOULD send it for all.
 - Vendor data MUST live under `extensions`, keyed by a reverse-domain name such as `com.example`. Core fields MUST NOT carry vendor-specific values.
 
 Example: [`examples/1.0/asset.json`](../../examples/1.0/asset.json)
@@ -394,3 +395,100 @@ A list of assets and their published moments, usually at `/arv.json`. Schema: [`
 - Every asset MUST validate as an Asset. Every moment MUST validate as a Moment and reference an asset in the same catalog or in another catalog the manifest lists.
 
 Example: [`examples/1.0/catalog.json`](../../examples/1.0/catalog.json)
+
+### 3.7.1 Changes read
+
+`GET {catalog}?since={cursor}` returns only what changed after the cursor. A crawler or agent uses it to stay current without fetching the whole catalog, and to learn about a removal quickly.
+
+Example: [`examples/1.0/catalog-changes.json`](../../examples/1.0/catalog-changes.json)
+
+```json
+{
+  "arv": "1.0",
+  "origin": "https://example.com",
+  "publisher": {
+    "name": "Example Garage"
+  },
+  "assets": [
+    {
+      "arv": "1.0",
+      "id": "vid_8f2c",
+      "title": "Tuning a carburettor",
+      "duration_ms": 1284000,
+      "language": "en",
+      "content_hash": "sha256:9b1e...",
+      "creator": {
+        "id": "cr_12",
+        "name": "Example Garage",
+        "url": "https://example.com"
+      },
+      "page_url": "https://example.com/videos/carb",
+      "c2pa": {
+        "credentials_url": "https://example.com/c2pa/vid_8f2c"
+      },
+      "extensions": {
+        "com.mux": {
+          "playback_id": "abc"
+        }
+      },
+      "modified_at": "2026-10-17T03:05:12.004Z"
+    }
+  ],
+  "moments": [],
+  "removed": [
+    "vid_91aa"
+  ],
+  "until": "c1.MTc5MjIwNjYyODg2OQ",
+  "next_since": "c1.MTc5MjIwNjUwODg2OQ"
+}
+```
+
+Cursors:
+
+- `since` is an RFC 3339 time with an offset, or a `next_since` value from an earlier read.
+- `until`, `after`, `next_after` and `next_since` are opaque strings. A client MUST send them back exactly as the server gave them. A server MAY change their format.
+- An asset is returned when its `modified_at` is later than the `since` time.
+
+A walk:
+
+- A changes read is a walk over one or more pages. Page 1 has `since` and no `until` or `after`. The server fixes `until` at the time it reads page 1, and every page of the walk carries it.
+- To read the next page, the client sends `since` unchanged, `until` as given, and `after` set to the page's `next_after`.
+- A page that has more behind it carries `next_after`. The last page has no `next_after` and carries `next_since` instead. A client that stops early therefore has no `next_since` to store by mistake.
+- Pages follow the catalog's own stable order, never `modified_at`. `after` names the last asset served, so an asset that changes or leaves the catalog mid-walk never moves another asset across a page boundary, and no asset is skipped.
+- `next_since` comes from `until`, minus an overlap the server chooses (AgentCDN uses 120 seconds), because a change can commit after a later one. A change made while a walk runs is returned again by the next walk, however long this one takes.
+- A changes read does not use `page`. A full read (no `since`) keeps whatever paging the catalog uses.
+
+Fields:
+
+- `assets` and `moments` hold the changed assets that are in the catalog now, in full, in the same shape as a full read.
+- `removed` lists the ids of assets that this catalog listed once and does not list now: rights ended, unpublished, made private or unlisted, deleted, or moved. It gives no reason. It comes on page 1 only.
+- An id is in `removed` or in `assets`, never both.
+- An asset the catalog never listed MUST NOT appear in `removed`, so the list does not reveal private ids.
+- An empty result has empty `assets`, `moments` and `removed`, and a current `next_since`.
+
+Errors are `400` with `{"error": code}`:
+
+- `invalid_since`: `since` is neither an RFC 3339 time nor a cursor from this server.
+- `invalid_until`: `until` without `since`, `after` without `until`, an `until` that is not a cursor from this server, one later than the server clock (a few seconds of skew are allowed), or one earlier than `since`.
+- `invalid_after`: an `after` that is not a cursor from this server, or `after` without `since`.
+- `invalid_page`: `page` together with `since`.
+
+Retention and absence:
+
+- A server that drops old change records MAY answer `410 Gone` to an old cursor. The client MUST then do a full read and keep the new `next_since`.
+- When the whole catalog goes away (the publisher went private or was retired), the catalog answers `404` on any page and for any cursor, including mid-walk. No `removed` list follows. A client MUST treat a `404` for a catalog as the removal of every asset it took from that catalog.
+- A server that does not support `since` MUST ignore it and return the full catalog.
+- A client SHOULD still reconcile against a full read from time to time, for example daily. An asset listed and removed again between two of the server's change records may never appear in `removed`.
+
+Client rules:
+
+- A client MUST treat every entry as idempotent. Applying the same asset or the same removal twice has no extra effect, and the overlap repeats entries by design.
+- A client that holds a removed asset SHOULD stop surfacing it as soon as it reads the signal.
+- Removal is a signal, never a permission. A change signal never grants access: seeing an asset in `assets` does not let a client play it. Rights, playback tokens and the forbidden-field rule apply as before.
+
+### 3.7.2 HTTP validators
+
+- Catalogs, manifests and sitemaps SHOULD send a strong `ETag` and MAY send `Last-Modified`.
+- They MUST answer `If-None-Match` with `304 Not Modified` and no body only when the bytes are unchanged.
+- A server MUST NOT answer `If-Modified-Since` with `304` when the body would differ. A server that cannot guarantee that MUST ignore `If-Modified-Since` and send the full document, as RFC 9110 allows.
+- Rights-bearing responses MUST stay out of shared caches, for example with `Cache-Control: private, no-cache`. The origin still takes the rights decision on every request.
