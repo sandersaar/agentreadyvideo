@@ -45,6 +45,29 @@
       "items": {
         "$ref": "moment.schema.json"
       }
+    },
+    "removed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Changes read (since): ids of assets this catalog listed once and does not list now. First page of a walk only. Absent on a full read."
+    },
+    "until": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Changes read: the opaque anchor of the walk, fixed on the first page. Every page carries it. Pass it back as until to read the rest of the walk."
+    },
+    "next_after": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Changes read: more changed assets remain. Pass it as after, with the same since and until, to read the next page. Absent on the last page."
+    },
+    "next_since": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Changes read: the opaque cursor to pass as since on the next walk. Last page only."
     }
   },
   "additionalProperties": true

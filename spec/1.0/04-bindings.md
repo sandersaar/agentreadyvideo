@@ -5,9 +5,9 @@ How ARV objects appear inside the standards it binds. Section 1.2 lists them all
 ## 4.1 Crawl time
 
 - **schema.org.** JSON-LD `VideoObject` with `hasPart` `Clip` items. Clip `@id` MUST equal `moment_uri`. Clip `url` MUST equal `moment_url`. A Clip MUST NOT be emitted for a moment whose rights do not allow `segment_display`. `SeekToAction` SHOULD be emitted only when the rights allow public playback of the full video.
-- **Sitemaps and MRSS.** Video sitemap and MRSS entries per asset, with `<link rel="arv">` to the manifest.
+- **Sitemaps and MRSS.** Video sitemap and MRSS entries per asset, with `<link rel="arv">` to the manifest. A video sitemap `lastmod` SHOULD equal the asset `modified_at`. A sitemap index `lastmod` is the newest of its children.
 - **llms.txt.** Sections in this order: what this is, manifest, tools, license, example questions.
-- **IndexNow.** Publishers SHOULD push when a moment or its rights change, not only when a page changes.
+- **IndexNow.** Publishers SHOULD push when a moment or its rights change, not only when a page changes. A removed watch URL SHOULD be pushed too, so a search engine drops it, but only for an asset the catalog listed once.
 - **RSL.** A `License:` line in robots.txt, and `Link: <license.xml>; rel="license"; type="application/rsl+xml"` on pages and on the catalog. Tokens MUST be RSL 1.0 words.
 - **AIPREF.** A `Content-Usage` header from the same rights record as RSL. The AIPREF vocabulary is still an IETF draft. ARV cites it as informative, and the validator pins the tokens it accepts.
 

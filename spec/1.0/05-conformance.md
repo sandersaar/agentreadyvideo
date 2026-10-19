@@ -15,6 +15,12 @@ The validator is not released yet. Until it is, use the [conformance checklist](
 7. The RSL `license.xml` parses and uses only RSL 1.0 tokens. robots.txt `License:` or a `Link` header points to it.
 8. No forbidden field appears in any L1 surface.
 
+Change signals, at L1 when the origin uses them (section 3.7.1):
+
+- Every asset `modified_at`, when present, is a valid RFC 3339 time.
+- The catalog, manifest and sitemap answer `If-None-Match` with `304` when unchanged, and rights-bearing responses send `Cache-Control: private`.
+- If the catalog supports `since`, a walk returns `until` on every page, `next_after` on every page but the last and `next_since` on the last, and each error case returns its code.
+
 ## L2 agent-callable (L1 plus)
 
 9. The MCP endpoint lists the origin profile names or declared aliases. Each input and result validates.

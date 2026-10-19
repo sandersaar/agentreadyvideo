@@ -71,6 +71,11 @@
       "additionalProperties": {
         "type": "object"
       }
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When anything public about the asset last changed (title, description, moments, transcript, rights, availability). RFC 3339 in UTC. Never moves backwards."
     }
   },
   "additionalProperties": true

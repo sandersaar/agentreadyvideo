@@ -19,6 +19,12 @@ For a publisher with files alone and no server code.
 - [ ] 7. The RSL `license.xml` parses and uses only RSL 1.0 tokens. robots.txt `License:` or a `Link` header points to it.
 - [ ] 8. No forbidden field (`playback_url`, `stream_url`, `playback_token`, or any media URL that plays without an origin check) appears in any L1 surface.
 
+Change signals, at L1 when the origin uses them (spec section 3.7.1):
+
+- [ ] Every asset `modified_at`, when present, is a valid RFC 3339 time.
+- [ ] The catalog, manifest and sitemap answer `If-None-Match` with `304` when unchanged, and rights-bearing responses send `Cache-Control: private`.
+- [ ] If the catalog supports `since`: a walk returns `until` on every page, `next_after` on every page but the last and `next_since` on the last; `invalid_since`, `invalid_until`, `invalid_after` and `invalid_page` each return 400 with that code; a catalog that goes away returns 404.
+
 ## L2 agent-callable (L1 plus)
 
 For a publisher with an MCP endpoint.
