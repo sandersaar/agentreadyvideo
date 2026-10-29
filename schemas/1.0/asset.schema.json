@@ -26,7 +26,18 @@
       "minimum": 0
     },
     "language": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$",
+      "description": "The main spoken language as a BCP 47 language tag (RFC 5646), for example en or de-AT. The same value as schema.org inLanguage. Omit it when unknown."
+    },
+    "caption_languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$"
+      },
+      "uniqueItems": true,
+      "description": "BCP 47 tags of the caption or subtitle tracks the origin offers. The same list as schema.org subtitleLanguage. An origin's own transcript is not a caption track."
     },
     "content_hash": {
       "type": "string"
