@@ -4,7 +4,7 @@ How ARV objects appear inside the standards it binds. Section 1.2 lists them all
 
 ## 4.1 Crawl time
 
-- **schema.org.** JSON-LD `VideoObject` with `hasPart` `Clip` items. Clip `@id` MUST equal `moment_uri`. Clip `url` MUST equal `moment_url`. A Clip MUST NOT be emitted for a moment whose rights do not allow `segment_display`. `SeekToAction` SHOULD be emitted only when the rights allow public playback of the full video. The `VideoObject` SHOULD carry `inLanguage` equal to the asset `language` and `subtitleLanguage` equal to `subtitle_languages`, when the asset has them.
+- **schema.org.** JSON-LD `VideoObject` with `hasPart` `Clip` items. Clip `@id` MUST equal `moment_uri`. Clip `url` MUST equal `moment_url`. A Clip MUST NOT be emitted for a moment whose rights do not allow `segment_display`. `SeekToAction` SHOULD be emitted only when the rights allow public playback of the full video. The `VideoObject` SHOULD carry `inLanguage` equal to the asset `language` and `subtitleLanguage` equal to `caption_languages`, when the asset has them.
 - **Sitemaps and MRSS.** Video sitemap and MRSS entries per asset, with `<link rel="arv">` to the manifest. A video sitemap `lastmod` SHOULD equal the asset `modified_at`. A sitemap index `lastmod` is the newest of its children.
 - **llms.txt.** Sections in this order: what this is, manifest, tools, license, example questions.
 - **IndexNow.** Publishers SHOULD push when a moment or its rights change, not only when a page changes. A removed watch URL SHOULD be pushed too, so a search engine drops it, but only for an asset the catalog listed once.

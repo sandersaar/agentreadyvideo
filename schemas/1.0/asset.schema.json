@@ -30,7 +30,7 @@
       "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$",
       "description": "The main spoken language as a BCP 47 language tag (RFC 5646), for example en or de-AT. The same value as schema.org inLanguage. Omit it when unknown."
     },
-    "subtitle_languages": {
+    "caption_languages": {
       "type": "array",
       "items": {
         "type": "string",
