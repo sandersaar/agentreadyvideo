@@ -9,11 +9,12 @@ All notable changes to the ARV specification, schemas and examples.
 - Added optional `idempotency_key` to `usage-request.schema.json` (section 3.5.1). A repeat of a recorded report by the same caller, for the same moment, action and key, within the origin's dedupe window, returns the original receipt and records no second use.
 - Added section 3.5.1 Reporting use and `usage-request.schema.json`: one request for `record_usage` and the new optional Manifest `usage_url` (https, requires `jwks_url`). Errors are `{"error": code}` with `moment_invalid` (400), `asset_not_found` (404), `action_not_permitted` and `quote_over_limit` (403). A receipt's `served_to.agent` is always the verified caller or `unverified`, never a caller claim.
 - A UsageReceipt JWS header MUST carry `typ: "arv-receipt+jwt"` and a `kid` in `jwks_url`, and verifiers reject any other `typ`. Conformance check 17 adds negative tests.
+- The maintainer is now named AgentTV (formerly AgentCDN), with its site at https://agenttv.com. Editorial only: no normative text, schema or example changed.
 - Public source repository created with the spec text, schemas, examples, conformance checklist and CI checks.
 
 ## 2026-10-05
 
-- IANA registered `arv` as a provisional URI scheme: https://www.iana.org/assignments/uri-schemes/prov/arv. Contact: team@agentreadyvideo.org. Change controller: AgentCDN, on behalf of the proposed Agent-Ready Video Community Group at W3C. References: https://agentreadyvideo.org/spec/1.0 (section 3.2 Moment) and https://agentreadyvideo.org/schema/1.0/moment.schema.json.
+- IANA registered `arv` as a provisional URI scheme: https://www.iana.org/assignments/uri-schemes/prov/arv. Contact: team@agentreadyvideo.org. Change controller: AgentTV (then AgentCDN), on behalf of the proposed Agent-Ready Video Community Group at W3C. References: https://agentreadyvideo.org/spec/1.0 (section 3.2 Moment) and https://agentreadyvideo.org/schema/1.0/moment.schema.json.
 
 ## 2026-09-25
 
@@ -21,8 +22,8 @@ All notable changes to the ARV specification, schemas and examples.
 
 ## 2026-09-24
 
-- W3C Community Group proposal under staff review; AgentCDN will contribute the draft under the W3C CLA at launch; draft charter added.
-- First origin live: AgentCDN serves an ARV 1.0 manifest at https://agentcdn.com/.well-known/arv, an ARV catalog, RSL 1.0 license terms, the Content-Usage header, range-addressed moment ids and an MCP origin profile (server agentcdn-arv). Self-declared, not yet validated; the validator is not released.
+- W3C Community Group proposal under staff review; AgentTV (then AgentCDN) will contribute the draft under the W3C CLA at launch; draft charter added.
+- First origin live: AgentTV (then AgentCDN) serves an ARV 1.0 manifest, now at https://agenttv.com/.well-known/arv, an ARV catalog, RSL 1.0 license terms, the Content-Usage header, range-addressed moment ids and an MCP origin profile (server agentcdn-arv). Self-declared, not yet validated; the validator is not released.
 - Added optional `entitlement` and `payment` objects to RightsSummary and PlaybackDescriptor, optional `payment_ref` and `entitlement_ref` to UsageReceipt, and optional `entitlement_url` and `payment_terms_url` to Manifest. Defined in 1.0, optional to implement. An L3 origin that sets `required: true` returns 402 or 403 with the challenge URL.
 - Added the example `rights-summary-account-link.json` for a restricted moment that needs account linking.
 - Launched the website at https://agentreadyvideo.org.

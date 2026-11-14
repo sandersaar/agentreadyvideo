@@ -4,7 +4,7 @@ This file covers the specification text: everything in `spec/`.
 
 ## At launch of the W3C Community Group
 
-AgentCDN will contribute the current draft of the spec text to the W3C Agent-Ready Video Community Group when the group launches. The contribution is made under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/process/cla/). From then on, the group governs how the specification evolves and publishes it as a Community Group Report. AgentCDN remains one implementer and the initial editor, with no special rights over the text.
+AgentTV will contribute the current draft of the spec text to the W3C Agent-Ready Video Community Group when the group launches. The contribution is made under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/process/cla/). From then on, the group governs how the specification evolves and publishes it as a Community Group Report. AgentTV remains one implementer and the initial editor, with no special rights over the text.
 
 ## Until launch
 

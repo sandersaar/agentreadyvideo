@@ -4,7 +4,7 @@ title: "Agent-Ready Video (ARV) Specification"
 abstract: "An open standard that makes video usable by AI agents: range-addressed moments, per-moment rights, typed evidence, player-neutral playback and signed usage receipts, bound to existing web and agent standards."
 type: software
 authors:
-  - name: AgentCDN
+  - name: AgentTV
 version: "1.0-draft"
 date-released: "2026-09-23"
 url: "https://agentreadyvideo.org/spec"
@@ -22,7 +22,7 @@ preferred-citation:
   type: standard
   title: "Agent-Ready Video (ARV) Specification, Draft 1.0 (proposed)"
   authors:
-    - name: AgentCDN
+    - name: AgentTV
   year: 2026
   month: 9
   url: "https://agentreadyvideo.org/spec"

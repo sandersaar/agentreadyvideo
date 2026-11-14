@@ -12,4 +12,4 @@ The license files themselves keep their own terms.
 
 The names "Agent-Ready Video" and "ARV" and the ARV badge are not licensed by any of these files. See [GOVERNANCE.md](GOVERNANCE.md).
 
-Copyright 2026 AgentCDN and ARV contributors.
+Copyright 2026 AgentTV and ARV contributors.
