@@ -49,7 +49,7 @@ No implementations are listed yet. ARV stays "proposed" until an outside impleme
 
 ## How to cite
 
-> Agent-Ready Video (ARV) Specification, Draft 1.0 (proposed). AgentCDN, 23 September 2026. https://agentreadyvideo.org/spec
+> Agent-Ready Video (ARV) Specification, Draft 1.0 (proposed). AgentTV, 23 September 2026. https://agentreadyvideo.org/spec
 
 Machine-readable citation: [`CITATION.cff`](CITATION.cff).
 
@@ -61,4 +61,4 @@ Open an issue with the **Proposal** template for a change to the spec or schemas
 
 Spec text: contributed to the W3C Agent-Ready Video Community Group under the [W3C CLA](https://www.w3.org/community/about/process/cla/) at launch. Until launch, spec text contributions are accepted under the same CLA terms. Schemas and code: Apache-2.0. Other docs: CC-BY-4.0. See [`LICENSES.md`](LICENSES.md).
 
-ARV is maintained by AgentCDN.
+ARV is maintained by [AgentTV](https://agenttv.com) (formerly AgentCDN).

@@ -39,4 +39,4 @@ Short definitions. Section 3 holds the normative rules.
 
 ## How to cite
 
-Agent-Ready Video (ARV) Specification, Draft 1.0 (proposed). AgentCDN, 23 September 2026. https://agentreadyvideo.org/spec
+Agent-Ready Video (ARV) Specification, Draft 1.0 (proposed). AgentTV, 23 September 2026. https://agentreadyvideo.org/spec

@@ -459,7 +459,7 @@ A walk:
 - To read the next page, the client sends `since` unchanged, `until` as given, and `after` set to the page's `next_after`.
 - A page that has more behind it carries `next_after`. The last page has no `next_after` and carries `next_since` instead. A client that stops early therefore has no `next_since` to store by mistake.
 - Pages follow the catalog's own stable order, never `modified_at`. `after` names the last asset served, so an asset that changes or leaves the catalog mid-walk never moves another asset across a page boundary, and no asset is skipped.
-- `next_since` comes from `until`, minus an overlap the server chooses (AgentCDN uses 120 seconds), because a change can commit after a later one. A change made while a walk runs is returned again by the next walk, however long this one takes.
+- `next_since` comes from `until`, minus an overlap the server chooses (AgentTV uses 120 seconds), because a change can commit after a later one. A change made while a walk runs is returned again by the next walk, however long this one takes.
 - A changes read does not use `page`. A full read (no `since`) keeps whatever paging the catalog uses.
 
 Fields:

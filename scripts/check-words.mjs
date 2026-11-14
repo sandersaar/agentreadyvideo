@@ -20,6 +20,12 @@ const rules = [
   { name: "retired subject", re: new RegExp(j("\\bNO", "AA\\b"), "i") },
 ];
 
+// The maintainer is AgentTV. Its former name may appear only as "formerly ..." or "then ...".
+const formerName = j("Agent", "CDN");
+const formerRe = new RegExp(j("\\b", formerName, "\\b|", formerName.toLowerCase(), "\\.com"));
+const formerAllowed = new RegExp(j("(formerly|then) ", formerName), "g");
+rules.push({ name: "former maintainer name", re: { test: (line) => formerRe.test(line.replace(formerAllowed, "")) } });
+
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
     if (skipDirs.has(entry)) continue;

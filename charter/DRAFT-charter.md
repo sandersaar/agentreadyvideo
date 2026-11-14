@@ -54,7 +54,7 @@ Key use cases: answering how-to questions with the exact moment of a video; citi
 
 ### Specifications
 
-- **Agent-Ready Video (ARV) 1.0.** The specification for range-addressed moments, per-moment rights, typed evidence, player-neutral playback, signed usage receipts, discovery and agent interfaces, with three conformance levels (L1 crawl-readable, L2 agent-callable, L3 rights and ledger). Starting point: the draft AgentCDN contributes at launch under the W3C CLA. The group publishes it as a Community Group Report.
+- **Agent-Ready Video (ARV) 1.0.** The specification for range-addressed moments, per-moment rights, typed evidence, player-neutral playback, signed usage receipts, discovery and agent interfaces, with three conformance levels (L1 crawl-readable, L2 agent-callable, L3 rights and ledger). Starting point: the draft AgentTV contributes at launch under the W3C CLA. The group publishes it as a Community Group Report.
 - **ARV JSON Schemas.** Normative JSON Schemas (draft 2020-12) for each ARV object, published at stable URLs under `https://agentreadyvideo.org/schema/`.
 
 ### Non-Normative Reports
@@ -98,7 +98,7 @@ The group will not publish specifications on topics other than those listed unde
 
 Substantive contributions to specifications can only be made by Community Group Participants who have agreed to the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/process/cla/).
 
-AgentCDN contributes the current ARV draft to the group at launch under the W3C CLA. AgentCDN remains one implementer and the initial editor, with no special rights over the text.
+AgentTV contributes the current ARV draft to the group at launch under the W3C CLA. AgentTV remains one implementer and the initial editor, with no special rights over the text.
 
 Reports other than Specifications published by this group should use the [W3C Software and Document License](https://www.w3.org/copyright/software-license-2023/) where possible.
 
